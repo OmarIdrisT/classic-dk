@@ -421,24 +421,26 @@ game.show_long_text("Este juego intenta recrear la experiencia exacta de ese cla
 
 def on_forever():
     global barrilR
-    for index in range(999999):
-        pause(3000)
-        barrilR = sprites.create(assets.image("""
-            barril1
-        """), SpriteKind.barril)
-        tiles.place_on_random_tile(barrilR, sprites.dungeon.collectible_red_crystal)
-        barrilR.set_velocity(-50, 0)
-        barrilR.ay = 500
+    if in_title == False and inMenu == False:
+        for index in range(999999):
+            pause(3000)
+            barrilR = sprites.create(assets.image("""
+                barril1
+            """), SpriteKind.barril)
+            tiles.place_on_random_tile(barrilR, sprites.dungeon.collectible_red_crystal)
+            barrilR.set_velocity(-50, 0)
+            barrilR.ay = 500
 forever(on_forever)
 
 def on_forever2():
     global barrilP
-    for index2 in range(999999):
-        pause(3000)
-        barrilP = sprites.create(assets.image("""
-            barril2
-        """), SpriteKind.projectile)
-        tiles.place_on_random_tile(barrilP, sprites.dungeon.collectible_blue_crystal)
-        barrilP.set_velocity(50, 0)
-        barrilP.ay = 500
+    if in_title == False and inMenu == False:
+        for index2 in range(999999):
+            pause(3000)
+            barrilP = sprites.create(assets.image("""
+                barril2
+            """), SpriteKind.projectile)
+            tiles.place_on_random_tile(barrilP, sprites.dungeon.collectible_blue_crystal)
+            barrilP.set_velocity(50, 0)
+            barrilP.ay = 500
 forever(on_forever2)
