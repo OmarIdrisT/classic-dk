@@ -24,12 +24,9 @@ function SpawnText (text: string, X: number, Y: number) {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (in_title) {
+        inMenu = true
         in_title = false
         Menu()
-    } else if (false) {
-    	
-    } else {
-    	
     }
 })
 function FadeToBlack (Time2: number) {
@@ -42,14 +39,17 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         mario.vy = -150
         if (controller.left.isPressed()) {
             mario.setImage(assets.image`mJumpL`)
+            pause(500)
+            mario.setImage(assets.image`marioL`)
         }
         if (controller.right.isPressed()) {
             mario.setImage(assets.image`mJumpR`)
+            pause(500)
+            mario.setImage(assets.image`Mario`)
         }
     }
 })
 function Menu () {
-    inMenu = true
     effects.blizzard.endScreenEffect()
     sprites.destroy(textSprite)
     scene.setBackgroundImage(img`
@@ -231,16 +231,16 @@ function Menu () {
         }
     })
 }
-let barrilP: Sprite = null
 let barrilR: Sprite = null
+let barrilP: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let mario: Sprite = null
 let textSprite: TextSprite = null
-let in_title = false
 let inMenu = false
+let in_title = false
 let inGame = false
-inMenu = false
 in_title = true
+inMenu = false
 FadeToWhite(4000)
 effects.blizzard.startScreenEffect(5000)
 scene.setBackgroundImage(img`
@@ -388,24 +388,20 @@ game.showLongText("Bienvenido a Donkey Kong! (Sí...Esto es un Donkey Kong...)",
 game.showLongText("Este fue el primer juego de Donkey Kong, salido en el año 1981, también fue la primera aparición de el fontanero más conocido del planeta.", DialogLayout.Bottom)
 game.showLongText("Este juego intenta recrear la experiencia exacta de ese clasico, esperamos qe lo disfrutes.", DialogLayout.Bottom)
 forever(function () {
-    if (in_title == false && inMenu == false) {
-        for (let index = 0; index < 999999; index++) {
-            pause(3000)
-            barrilR = sprites.create(assets.image`barril1`, SpriteKind.barril)
-            tiles.placeOnRandomTile(barrilR, sprites.dungeon.collectibleRedCrystal)
-            barrilR.setVelocity(-50, 0)
-            barrilR.ay = 500
-        }
+    for (let index = 0; index < 999999; index++) {
+        pause(3000)
+        barrilP = sprites.create(assets.image`barril2`, SpriteKind.Projectile)
+        tiles.placeOnRandomTile(barrilP, sprites.dungeon.collectibleBlueCrystal)
+        barrilP.setVelocity(50, 0)
+        barrilP.ay = 500
     }
 })
 forever(function () {
-    if (in_title == false && inMenu == false) {
-        for (let index = 0; index < 999999; index++) {
-            pause(3000)
-            barrilP = sprites.create(assets.image`barril2`, SpriteKind.Projectile)
-            tiles.placeOnRandomTile(barrilP, sprites.dungeon.collectibleBlueCrystal)
-            barrilP.setVelocity(50, 0)
-            barrilP.ay = 500
-        }
+    for (let index = 0; index < 999999; index++) {
+        pause(3000)
+        barrilR = sprites.create(assets.image`barril1`, SpriteKind.barril)
+        tiles.placeOnRandomTile(barrilR, sprites.dungeon.collectibleRedCrystal)
+        barrilR.setVelocity(-50, 0)
+        barrilR.ay = 500
     }
 })
